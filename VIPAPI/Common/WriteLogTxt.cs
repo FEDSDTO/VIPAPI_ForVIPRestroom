@@ -10,8 +10,8 @@ namespace VIPAPI.Common
     {
         public void Txt(string ex)
         {
-            //string sourcePath = @"C:\Website\VIPAPI\Log" + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + "狀態.txt";       //正式
-            string sourcePath = @"D:\Website\VIPAPI\Log\" + DateTime.Now.ToString("yyyy-MM-dd") + "狀態.txt";     //測試
+            string sourcePath = @"D:\Website\VIPAPI\Log" + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + "狀態.txt";       //正式
+            //string sourcePath = @"D:\Website\VIPAPI\Log\" + DateTime.Now.ToString("yyyy-MM-dd") + "狀態.txt";     //測試
             //string sourcePath = @"E:\POJHIH\Website\VIPAPI\Log\" + DateTime.Now.ToString("yyyy-MM-dd") + "狀態.txt";    //本地
             #region  寫入txt檔
             string txt = "";
