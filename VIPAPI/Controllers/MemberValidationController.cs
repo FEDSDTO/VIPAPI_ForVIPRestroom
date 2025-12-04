@@ -25,10 +25,10 @@ namespace VIPAPI.Controllers
         WriteLogTxt WriteLog = new WriteLogTxt();
         private string apToken;
 
-        public IHttpActionResult Get()
-        {
-            return Ok("OK");
-        }
+        //public IHttpActionResult Get()
+        //{
+        //    return Ok("OK");
+        //}
 
         [HttpPost]
         [ApiTokenAuthorizationFilter] //判斷header Aptoken
@@ -54,7 +54,7 @@ namespace VIPAPI.Controllers
                                join vip in _MemberCard.VIPCard on cd.Id equals vip.CDId
                                join cardInfo in _MemberCard.CardInfo on vip.CIId equals cardInfo.Id
                                where cardInfo.MemberId == _MemberCode.MemberId.ToString() &&
-                                     cardInfo.CardTypeId == 5 &&
+                                     (cardInfo.CardTypeId == 5 || cardInfo.CardTypeId == 4) &&
                                      cardInfo.MallId == "53" &&
                                      cardInfo.Year == DateTime.Now.Year &&
                                      cardInfo.Status == 1 &&
