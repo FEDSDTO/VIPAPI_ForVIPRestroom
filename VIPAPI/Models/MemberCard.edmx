@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MemberCardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardTypeId" Type="int" />
+          <Property Name="FileId" Type="bigint" />
+          <Property Name="Year" Type="int" />
+          <Property Name="OpenStart" Type="datetime" />
+          <Property Name="OpenEnd" Type="datetime" />
+          <Property Name="ExpStart" Type="datetime" />
+          <Property Name="ExpEnd" Type="datetime" />
+          <Property Name="IsUse" Type="bit" />
+        </EntityType>
+        <EntityType Name="CardInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="MallId" Type="varchar" MaxLength="10" />
+          <Property Name="MemberId" Type="varchar" MaxLength="20" />
+          <Property Name="HappyGoNo" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+          <Property Name="ChildName" Type="nvarchar" MaxLength="10" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="20" />
+          <Property Name="MuId" Type="nvarchar" MaxLength="25" />
+          <Property Name="RealMuid" Type="nvarchar" MaxLength="25" />
+          <Property Name="CardTypeId" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="MemberBirth" Type="datetime" />
+          <Property Name="ChildBirth" Type="datetime" />
+          <Property Name="DueDay" Type="datetime" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="20" />
+          <Property Name="Checker" Type="bigint" />
+          <Property Name="CheckDate" Type="datetime" />
+          <Property Name="ModifyUser" Type="bigint" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsUse" Type="bit" />
+        </EntityType>
+        <EntityType Name="VIPCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CDId" Type="bigint" />
+          <Property Name="CIId" Type="bigint" />
+          <Property Name="Filter" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="CTDId" Type="int" />
+          <Property Name="CheckMall" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="MemberCardModelStoreContainer">
+          <EntitySet Name="CardDate" EntityType="Self.CardDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardInfo" EntityType="Self.CardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIPCard" EntityType="Self.VIPCard" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MemberCardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardTypeId" Type="Int32" />
+          <Property Name="FileId" Type="Int64" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="OpenStart" Type="DateTime" Precision="3" />
+          <Property Name="OpenEnd" Type="DateTime" Precision="3" />
+          <Property Name="ExpStart" Type="DateTime" Precision="3" />
+          <Property Name="ExpEnd" Type="DateTime" Precision="3" />
+          <Property Name="IsUse" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CardInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="MallId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MemberId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HappyGoNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ChildName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MuId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RealMuid" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CardTypeId" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="MemberBirth" Type="DateTime" Precision="3" />
+          <Property Name="ChildBirth" Type="DateTime" Precision="3" />
+          <Property Name="DueDay" Type="DateTime" Precision="3" />
+          <Property Name="Cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Checker" Type="Int64" />
+          <Property Name="CheckDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUser" Type="Int64" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsUse" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="VIPCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CDId" Type="Int64" />
+          <Property Name="CIId" Type="Int64" />
+          <Property Name="Filter" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="CTDId" Type="Int32" />
+          <Property Name="CheckMall" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MemberCardEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardDate" EntityType="Self.CardDate" />
+          <EntitySet Name="CardInfo" EntityType="Self.CardInfo" />
+          <EntitySet Name="VIPCard" EntityType="Self.VIPCard" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MemberCardModelStoreContainer" CdmEntityContainer="MemberCardEntities">
+          <EntitySetMapping Name="CardDate">
+            <EntityTypeMapping TypeName="MemberCardModel.CardDate">
+              <MappingFragment StoreEntitySet="CardDate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="OpenStart" ColumnName="OpenStart" />
+                <ScalarProperty Name="OpenEnd" ColumnName="OpenEnd" />
+                <ScalarProperty Name="ExpStart" ColumnName="ExpStart" />
+                <ScalarProperty Name="ExpEnd" ColumnName="ExpEnd" />
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardInfo">
+            <EntityTypeMapping TypeName="MemberCardModel.CardInfo">
+              <MappingFragment StoreEntitySet="CardInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MallId" ColumnName="MallId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="HappyGoNo" ColumnName="HappyGoNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="MuId" ColumnName="MuId" />
+                <ScalarProperty Name="RealMuid" ColumnName="RealMuid" />
+                <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MemberBirth" ColumnName="MemberBirth" />
+                <ScalarProperty Name="ChildBirth" ColumnName="ChildBirth" />
+                <ScalarProperty Name="DueDay" ColumnName="DueDay" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Checker" ColumnName="Checker" />
+                <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+                <ScalarProperty Name="ModifyUser" ColumnName="ModifyUser" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIPCard">
+            <EntityTypeMapping TypeName="MemberCardModel.VIPCard">
+              <MappingFragment StoreEntitySet="VIPCard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CDId" ColumnName="CDId" />
+                <ScalarProperty Name="CIId" ColumnName="CIId" />
+                <ScalarProperty Name="Filter" ColumnName="Filter" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CTDId" ColumnName="CTDId" />
+                <ScalarProperty Name="CheckMall" ColumnName="CheckMall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
