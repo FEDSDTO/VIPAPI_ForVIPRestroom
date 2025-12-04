@@ -43,6 +43,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -58,6 +64,8 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -77,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="WebActivatorEx">
@@ -98,19 +105,138 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Models\FEDS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FEDS.edmx</DependentUpon>
+      <LastGenOutput>FEDS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FEDS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FEDS.edmx</DependentUpon>
+      <LastGenOutput>FEDS.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Gifts.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Gifts.edmx</DependentUpon>
+      <LastGenOutput>Gifts.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Gifts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Gifts.edmx</DependentUpon>
+      <LastGenOutput>Gifts.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MemberCard.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MemberCard.edmx</DependentUpon>
+      <LastGenOutput>MemberCard.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MemberCard.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MemberCard.edmx</DependentUpon>
+      <LastGenOutput>MemberCard.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Common\DB_Connection.cs" />
+    <Compile Include="Common\WriteLogTxt.cs" />
+    <Compile Include="Controllers\MemberValidationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\ApiTokenAuthorizationFilter.cs" />
+    <Compile Include="Models\APIModel.cs" />
+    <Compile Include="Models\APIResponse.cs" />
+    <Compile Include="Models\CardDate.cs">
+      <DependentUpon>MemberCard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CardInfo.cs">
+      <DependentUpon>MemberCard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEDS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FEDS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEDS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FEDS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FEDS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gifts.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gifts.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gifts.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gifts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gifts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gifts.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberCard.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberCard.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberCard.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberCard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberCard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberCard.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberCode.cs">
+      <DependentUpon>FEDS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PosToken.cs">
+      <DependentUpon>Gifts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VIPCard.cs">
+      <DependentUpon>MemberCard.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\FEDS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FEDS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FEDS.edmx.diagram">
+      <DependentUpon>FEDS.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Gifts.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Gifts.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Gifts.edmx.diagram">
+      <DependentUpon>Gifts.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\MemberCard.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MemberCard.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MemberCard.edmx.diagram">
+      <DependentUpon>MemberCard.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,7 +244,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
