@@ -50,13 +50,13 @@ namespace VIPAPI.Controllers
                     return Ok(response);
                 }
 
+                // 2026/01/30 跨年度會抓不到去年的VIP，故移除cardInfo Year的判斷
                 var _Result = (from cd in _MemberCard.CardDate
                                join vip in _MemberCard.VIPCard on cd.Id equals vip.CDId
                                join cardInfo in _MemberCard.CardInfo on vip.CIId equals cardInfo.Id
                                where cardInfo.MemberId == _MemberCode.MemberId.ToString() &&
                                      (cardInfo.CardTypeId == 5 || cardInfo.CardTypeId == 4) &&
                                      cardInfo.MallId == "53" &&
-                                     cardInfo.Year == DateTime.Now.Year &&
                                      cardInfo.Status == 1 &&
                                      cd.ExpStart < DateTime.Now &&
                                      cd.ExpEnd > DateTime.Now
