@@ -68,6 +68,7 @@ namespace VIPAPI.Controllers
                     return Ok(response);
                 }
                 response.Status = "True";
+                WriteLog.Txt($"呼叫MemberValidation_Post，ApToken：{apToken}，{JsonConvert.SerializeObject(Member)}，Success");
                 return Ok(response);
             }
             catch (Exception ex)
