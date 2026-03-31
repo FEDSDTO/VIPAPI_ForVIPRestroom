@@ -29,7 +29,58 @@ namespace VIPAPI.Controllers
         //{
         //    return Ok("OK");
         //}
+        [HttpGet]
+        public IHttpActionResult Get(DateTime start, DateTime end)
+        {
+            var report = new LogReportResponse();
+            string logFolder = System.Web.Hosting.HostingEnvironment.MapPath("~/Log/");
+            //string logFolder = "E:/POJHIH/Website/VIPAPI/Log/";
+            //WriteLog.Txt($"logFolder：{logFolder}");
+            // 遍歷起訖日期之間的每一天
+            for (DateTime date = start.Date; date <= end.Date; date = date.AddDays(1))
+            {
+                string fileName = $"{date:yyyy-MM-dd}狀態.txt";
+                string filePath = System.IO.Path.Combine(logFolder, fileName);
 
+                var dailyStat = new LogDailyStat { Date = date.ToString("yyyy-MM-dd") };
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    // 讀取該日檔案進行統計
+                    var lines = System.IO.File.ReadLines(filePath).ToList();
+                    dailyStat.SuccessCount = lines.Count(l => l.Contains("，Success"));
+                    dailyStat.ErrorCount = lines.Count(l => l.Contains("，Error"));
+                    dailyStat.Total = lines.Count;
+
+                    // 累加到總計
+                    report.GrandTotalSuccess += dailyStat.SuccessCount;
+                    report.GrandTotalError += dailyStat.ErrorCount;
+                }
+                else
+                {
+                    // 若檔案不存在，數值皆為 0
+                    dailyStat.Total = 0;
+                }
+
+                report.Details.Add(dailyStat);
+            }
+
+            return Ok(report);
+        }
+        public class LogReportResponse
+        {
+            public List<LogDailyStat> Details { get; set; } = new List<LogDailyStat>();
+            public int GrandTotalSuccess { get; set; }
+            public int GrandTotalError { get; set; }
+        }
+
+        public class LogDailyStat
+        {
+            public string Date { get; set; }      // 日期 (例如 2026-03-17)
+            public int SuccessCount { get; set; }
+            public int ErrorCount { get; set; }
+            public int Total { get; set; }
+        }
         [HttpPost]
         [ApiTokenAuthorizationFilter] //判斷header Aptoken
         public IHttpActionResult Post(MemberValidation Member)
